@@ -1,0 +1,243 @@
+/* BCs Genie 2026 — Year 2030 dark mystical theme
+   Deep midnight + indigo with lamp-gold accents and aurora glows */
+
+:root {
+  /* Base palette */
+  --void: oklch(0.07 0.025 275);
+  --abyss: oklch(0.10 0.035 278);
+  --night: oklch(0.14 0.045 275);
+  --twilight: oklch(0.20 0.06 278);
+  --dusk: oklch(0.28 0.07 280);
+
+  --ink: oklch(0.96 0.012 90);
+  --ink-soft: oklch(0.84 0.02 90 / 0.78);
+  --ink-faint: oklch(0.72 0.025 280 / 0.55);
+  --ink-ghost: oklch(0.65 0.04 280 / 0.32);
+
+  /* Accents — lamp glow + mystic */
+  --gold: oklch(0.86 0.14 78);
+  --gold-deep: oklch(0.74 0.16 70);
+  --gold-glow: oklch(0.86 0.18 78 / 0.55);
+
+  --orchid: oklch(0.72 0.21 305);
+  --plasma: oklch(0.78 0.18 240);
+  --aurora: oklch(0.82 0.18 195);
+  --ember: oklch(0.70 0.20 25);
+
+  /* Glass surfaces */
+  --glass-1: oklch(0.20 0.05 278 / 0.42);
+  --glass-2: oklch(0.18 0.05 278 / 0.62);
+  --glass-edge: oklch(0.95 0.02 280 / 0.10);
+  --glass-edge-strong: oklch(0.95 0.02 280 / 0.18);
+
+  /* Typography */
+  --font-display: "Instrument Serif", "Cormorant Garamond", "Tenor Sans", serif;
+  --font-ui: "Geist", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Geist Mono", ui-monospace, monospace;
+
+  /* Spacing */
+  --pad: 16px;
+  --pad-lg: 24px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Density token, set by tweaks */
+  --density: 1;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 10%, oklch(0.30 0.16 295 / 0.35), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 90%, oklch(0.40 0.18 230 / 0.30), transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 100%, oklch(0.18 0.10 290 / 0.5), transparent 70%),
+    var(--void);
+}
+
+/* Star field */
+.stars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 23%, oklch(0.92 0.02 280 / 0.7), transparent 50%),
+    radial-gradient(1px 1px at 27% 67%, oklch(0.92 0.02 280 / 0.5), transparent 50%),
+    radial-gradient(1px 1px at 45% 12%, oklch(0.92 0.02 280 / 0.8), transparent 50%),
+    radial-gradient(1px 1px at 63% 89%, oklch(0.92 0.02 280 / 0.4), transparent 50%),
+    radial-gradient(1px 1px at 81% 34%, oklch(0.92 0.02 280 / 0.6), transparent 50%),
+    radial-gradient(1px 1px at 91% 58%, oklch(0.92 0.02 280 / 0.5), transparent 50%),
+    radial-gradient(2px 2px at 18% 78%, var(--gold-glow), transparent 50%),
+    radial-gradient(2px 2px at 72% 18%, oklch(0.78 0.18 240 / 0.4), transparent 50%),
+    radial-gradient(1px 1px at 8% 91%, oklch(0.92 0.02 280 / 0.4), transparent 50%),
+    radial-gradient(1px 1px at 55% 42%, oklch(0.92 0.02 280 / 0.45), transparent 50%);
+  animation: twinkle 9s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Glass primitive */
+.glass {
+  background: var(--glass-1);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 0.5px solid var(--glass-edge);
+  border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.05),
+    0 20px 60px oklch(0 0 0 / 0.4);
+}
+
+.glass-strong {
+  background: var(--glass-2);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+  border: 0.5px solid var(--glass-edge-strong);
+  border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.08),
+    0 24px 80px oklch(0 0 0 / 0.5);
+}
+
+/* Buttons */
+.btn {
+  appearance: none;
+  border: 0.5px solid var(--glass-edge-strong);
+  background: var(--glass-1);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  cursor: default;
+  transition: all .25s cubic-bezier(.2,.7,.2,1);
+  display: inline-flex; align-items: center; gap: 8px;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.btn:hover {
+  background: var(--glass-2);
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 24px var(--gold-glow);
+  color: var(--gold);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+  color: var(--void);
+  border-color: var(--gold);
+  box-shadow: 0 0 28px var(--gold-glow), inset 0 1px 0 oklch(1 0 0 / 0.3);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 40px var(--gold-glow), inset 0 1px 0 oklch(1 0 0 / 0.4);
+  color: var(--void);
+}
+.btn-ghost {
+  background: transparent;
+  border: 0.5px solid transparent;
+}
+.btn-ghost:hover {
+  background: var(--glass-1);
+  border-color: var(--glass-edge);
+  box-shadow: none;
+}
+
+/* Inputs */
+.input, .textarea {
+  appearance: none;
+  background: oklch(0.10 0.04 278 / 0.55);
+  border: 0.5px solid var(--glass-edge);
+  color: var(--ink);
+  font: inherit;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  width: 100%;
+  outline: none;
+  transition: all .2s ease;
+}
+.input::placeholder, .textarea::placeholder { color: var(--ink-ghost); }
+.input:focus, .textarea:focus {
+  border-color: var(--gold-glow);
+  background: oklch(0.12 0.05 278 / 0.7);
+  box-shadow: 0 0 0 4px var(--gold-glow);
+}
+.textarea { resize: none; line-height: 1.5; }
+
+/* Display type */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.mono { font-family: var(--font-mono); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: oklch(0.5 0.05 280 / 0.25);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: oklch(0.6 0.08 280 / 0.4); background-clip: content-box; }
+
+/* Selection */
+::selection { background: var(--gold-glow); color: var(--void); }
+
+/* Misc */
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: oklch(1 0 0 / 0.08);
+  border: 0.5px solid var(--glass-edge);
+  color: var(--ink-soft);
+}
+
+/* shimmer/skeleton */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg,
+    transparent 0%, oklch(0.86 0.14 78 / 0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .5s cubic-bezier(.2,.7,.2,1) both; }
+
+/* Pulse ring */
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
